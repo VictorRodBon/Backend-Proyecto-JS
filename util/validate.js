@@ -23,12 +23,11 @@ validarRegistro = [
 ];
 
 validarLogin = [
-    body('email')
+    body('identificador')
         .trim()
-        .notEmpty().withMessage('El email es obligatorio')
-        .isEmail().withMessage('Debe ser un email válido')
+        .notEmpty().withMessage('El identificador es obligatorio')
         .escape(),
-    body('clave')
+    body('password')
         .notEmpty().withMessage('La contraseña es obligatoria')
         .escape(),
 ];

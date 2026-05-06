@@ -4,7 +4,6 @@ services:
     image: mongo
     volumes:
       - mongodb:/data/db
-      - ./peliculas.json:/docker-entrypoint-initdb.d/peliculas.json
     ports:
       - "27017:27017"
     environment:
@@ -15,14 +14,19 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - 9017:8081
+      - "9017:8081"
     environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017
       - ME_CONFIG_MONGODB_ADMINUSERNAME=root
       - ME_CONFIG_MONGODB_ADMINPASSWORD=example
       - ME_CONFIG_BASICAUTH_USERNAME=user123
       - ME_CONFIG_BASICAUTH_PASSWORD=pass123
+      - ME_CONFIG_MONGODB_SERVER=mongodb
     depends_on:
       - mongodb
+    networks:
+      default:
+        aliases:
+          - mongo
 volumes:
   mongodb:
