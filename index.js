@@ -12,6 +12,7 @@ const { MongoStore } = require('connect-mongo');
 
 const rutasUsuarios = require('./rutas/rutasClientes');
 const rutasHabitaciones = require('./rutas/rutasHabitaciones');
+const rutasEmpleados = require('./rutas/rutasEmpleados');
 
 const app = express();
 
@@ -46,6 +47,7 @@ mongoose.connect(process.env.DB_URL)
 
 app.use('/usuarios', rutasUsuarios);
 app.use('/habitaciones', rutasHabitaciones);
+app.use('/empleados', rutasEmpleados);
 
 app.use((req, res) => {
     res.status(404).send('Ruta no encontrada');
