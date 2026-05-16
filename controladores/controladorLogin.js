@@ -25,7 +25,12 @@ const usuarioLogin = async (req, res) => {
         req.session.usuarioId = usuario._id;
         req.session.tipo = tipo;
 
-        res.json({ tipo });
+        const payload = { tipo };
+        if (tipo === 'empleado') {
+            payload.puesto = usuario.puesto;
+        }
+
+        res.json(payload);
     } catch (error) {
         res.status(500).json({ message: 'Error en el login', error });
     }

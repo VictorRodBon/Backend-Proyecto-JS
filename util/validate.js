@@ -1,24 +1,24 @@
 const { body } = require('express-validator');
 
 validarRegistro = [
-    body('codigo')
+    body('name')
         .trim()
-        .notEmpty().withMessage('El codigo es obligatorio')
-        .isLength({ min: 3 }).withMessage('El codigo debe tener al menos 3 caracteres')
+        .notEmpty().withMessage('El nombre es obligatorio')
+        .isLength({ min: 3 }).withMessage('El nombre debe tener al menos 3 caracteres')
         .escape(),
-    body('email')
+    body('mail')
         .trim()
         .notEmpty().withMessage('El email es obligatorio')
         .isEmail().withMessage('Debe ser un email válido')
         .normalizeEmail(),
-    body('clave')
+    body('password')
         .notEmpty().withMessage('La contraseña es obligatoria')
         .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres')
         .escape(),
-    body('nombre')
+    body('city')
         .trim()
-        .notEmpty().withMessage('El nombre es obligatorio')
-        .isLength({ min: 3 }).withMessage('El nombre debe tener al menos 3 caracteres')
+        .notEmpty().withMessage('La ciudad es obligatoria')
+        .isLength({ min: 2 }).withMessage('La ciudad debe tener al menos 2 caracteres')
         .escape()
 ];
 

@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: process.env.CORS_URL,
+    origin: process.env.CORS_URL || 'http://localhost:5500',
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS', 'PUT'],
     credentials: true
 }));
@@ -53,5 +53,5 @@ app.use((req, res) => {
     res.status(404).send('Ruta no encontrada');
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));

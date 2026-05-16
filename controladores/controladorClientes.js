@@ -12,14 +12,17 @@ const clienteRegistro = async (req, res) => {
         return res.status(400).json({ errores: errores.array() });
     }
     try {
-        const { id, name, mail, city, password } = req.body;
+        const { name, mail, city, password } = req.body;
 
         // Verificar si ya existe
-        const existingCliente = await Usuario2.findOne({ mail });
+        const existingCliente = await Cliente.findOne({ mail });
         if (existingCliente) return res.status(400).json({ message: 'El usuario ya existe' });
 
         // Cifrar contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Generar id único para el cliente
+        const id = Date.now().toString();
 
         // Crear usuario
         const nuevoCliente = new Cliente({

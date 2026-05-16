@@ -13,11 +13,11 @@ const getHabitaciones = async (req, res) => {
 
 const getHabitacionById = async (req, res) => {
     try{
-        const {id}= req.body;
-        const habitacion = await Habitaciones.findById(id);
-        if(!habitacion)return res.status(404).json({ message: 'Habitación no encontrada' });
+        const { id } = req.params;
+        const habitacion = await Habitaciones.findOne({ id });
+        if(!habitacion) return res.status(404).json({ message: 'Habitación no encontrada' });
         res.status(200).json(habitacion);
-    }catch(err){
+    } catch(err) {
         res.status(500).json({ message: 'Error al obtener la habitación por id', err });
     }
 }
@@ -31,8 +31,8 @@ const actualizarHabitacion = async (req, res) => {
         const { id } = req.params;
         const updates = req.body;
 
-        const habitacion = await Habitaciones.findByIdAndUpdate(
-            id,
+        const habitacion = await Habitaciones.findOneAndUpdate(
+            { id },
             updates,
             { new: true, runValidators: true }
         );
